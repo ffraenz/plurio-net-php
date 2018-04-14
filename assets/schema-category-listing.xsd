@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="categories">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="german">
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="agenda"/>
+              <xs:element ref="guide"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="french">
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="agenda"/>
+              <xs:element ref="guide"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="english">
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="agenda"/>
+              <xs:element ref="guide"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="agenda">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element ref="category" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="guide">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element ref="category" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="category">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="level1"/>
+        <xs:element name="level2" minOccurs="0"/>
+        <xs:element name="level3" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="id" type="xs:integer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

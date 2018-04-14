@@ -1,0 +1,25 @@
+{
+    "name": "plurio-net-php",
+    "description": "Abstraction layer for the XML interface of Plurio.net",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fränz Friederes",
+            "homepage": "https://fraenz.frieder.es"
+        }
+    ],
+    "homepage": "https://github.com/ffraenz/plurio-net-php",
+    "keywords": [
+        "Plurio.net",
+        "Luxembourg",
+        "Events"
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "FFraenz\\PlurioNet\\": "src/"
+        }
+    }
+}

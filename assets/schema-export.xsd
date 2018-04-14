@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- XML schema for Plurio.net data export (v1.6) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="plurioTypes" elementFormDefault="qualified">
+  <xs:element name="agenda">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element ref="event" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="booking">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="ticketId"/>
+          <xs:element ref="ticketUrl"/>
+        </xs:choice>
+        <xs:element ref="phoneNumber" minOccurs="0"/>
+        <xs:element ref="bookingInfo" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bookingInfo"/>
+  <xs:element name="agendaCategories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="category" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contactEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="phoneNumbers" minOccurs="0"/>
+        <xs:element ref="websites" minOccurs="0"/>
+        <xs:element ref="emailAdresses" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="date">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="dateFrom"/>
+        <xs:element ref="dateTo" minOccurs="0"/>
+        <xs:element ref="dateExclusions" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dateDay"/>
+  <xs:element name="dateExclusions">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element ref="dateDay" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="dateWeekday" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dateFrom" type="xs:date"/>
+  <xs:element name="dateTo" type="xs:date"/>
+  <xs:element name="dateWeekday"/>
+  <xs:element name="emailAdresses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="emailAdress" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="emailAdressFunctionId"/>
+  <xs:element name="event">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="subtitleOne" minOccurs="0"/>
+        <xs:element ref="subtitleTwo" minOccurs="0"/>
+        <xs:element ref="localDescription" minOccurs="0"/>
+        <xs:element ref="shortDescriptions" minOccurs="0"/>
+        <xs:element ref="longDescriptions" minOccurs="0"/>
+        <xs:element ref="texts" minOccurs="0"/>
+        <xs:element ref="date"/>
+        <xs:element ref="timings" minOccurs="0"/>
+        <xs:element ref="prices" minOccurs="0"/>
+        <xs:element ref="booking" minOccurs="0"/>
+        <xs:element ref="tickets" minOccurs="0"/>
+        <xs:element ref="contactEvent" minOccurs="0"/>
+        <xs:element ref="relationsAgenda"/>
+        <xs:element ref="userspecific" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:integer" use="optional"/>
+      <xs:attribute name="xmlid" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="eventRelEventTypeId"/>
+  <xs:element name="id"/>
+  <xs:element name="internalEvents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="intEvent" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="longDescriptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="longDescription" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mainNumber"/>
+  <xs:element name="emailAdressUrl"/>
+  <xs:element name="name"/>
+  <xs:element name="organisationsToEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="organisation" maxOccurs="unbounded">
+          <xs:complexType mixed="true">
+            <xs:attribute name="id" use="required"/>
+            <xs:attribute name="type"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="organisationRelEventTypeId"/>
+  <xs:element name="personRelEventTypeId"/>
+  <xs:element name="personsToEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="person" maxOccurs="unbounded">
+          <xs:complexType mixed="true">
+            <xs:attribute name="id" use="required"/>
+            <xs:attribute name="type"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phoneNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="phoneNumberFunctionId" minOccurs="0"/>
+        <xs:element ref="phoneNumberAreaCode" minOccurs="0"/>
+        <xs:element ref="mainNumber"/>
+      </xs:sequence>
+      <xs:attribute name="phoneType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phoneNumbers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="phoneNumber" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phoneNumberFunctionId"/>
+  <xs:element name="picture">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url"/>
+        <xs:element ref="position" minOccurs="0"/>
+        <xs:element ref="title"/>
+        <xs:element ref="alt"/>
+        <xs:element ref="description" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:integer" use="required"/>
+      <xs:attribute name="position"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pictures">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="picture" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="plurio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="header"/>
+        <xs:element ref="agenda" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="price">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="priceDescription"/>
+        <xs:element ref="priceValue"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="priceDescription"/>
+  <xs:element name="priceValue"/>
+  <xs:element name="prices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="price" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="freeOfCharge" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:boolean"/>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relationsAgenda">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="internalEvents" minOccurs="0"/>
+        <xs:element ref="placeOfEvent"/>
+        <xs:element ref="personsToEvent" minOccurs="0"/>
+        <xs:element ref="organisationsToEvent" minOccurs="0"/>
+        <xs:element ref="pictures" minOccurs="0"/>
+        <xs:element ref="movies" minOccurs="0"/>
+        <xs:element ref="agendaCategories"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="shortDescriptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="shortDescription" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="street"/>
+  <xs:element name="subtitleOne"/>
+  <xs:element name="subtitleTwo"/>
+  <xs:element name="ticketUrl"/>
+  <xs:element name="ticketId"/>
+  <xs:element name="timing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="timingDescription"/>
+        <xs:element ref="timingFrom"/>
+        <xs:element ref="timingTo" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="timingDescription"/>
+  <xs:element name="timingFrom" type="xs:time"/>
+  <xs:element name="timingTo" type="xs:time"/>
+  <xs:element name="timingException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="dateDay"/>
+          <xs:element ref="dateWeekday"/>
+        </xs:choice>
+        <xs:element ref="timing" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="timingExceptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="timingException" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="timings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="timing" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="timingExceptions" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="visitorInfo">
+    <xs:simpleType>
+      <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="website"/>
+  <xs:element name="websites">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="website" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="emailAdress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="emailAdressUrl"/>
+        <xs:element ref="emailAdressFunctionId" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="userspecific">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="entityId" minOccurs="0"/>
+        <xs:element ref="entityInfo" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="entityId">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="255"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="entityInfo">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="255"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="export_version"/>
+        <xs:element ref="export_file"/>
+        <xs:element ref="export_url"/>
+        <xs:element ref="export_date"/>
+        <xs:element ref="export_time"/>
+        <xs:element ref="export_group"/>
+        <xs:element ref="export_filter"/>
+        <xs:element ref="export_xsd"/>
+        <xs:element ref="export_categories"/>
+        <xs:element ref="export_types"/>
+        <xs:element name="export_events_count" minOccurs="0"/>
+        <xs:element ref="export_count" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="export_group">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="export_date" type="xs:date"/>
+  <xs:element name="export_time" type="xs:time"/>
+  <xs:element name="export_filter"/>
+  <xs:element name="intEvent">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required"/>
+      <xs:attribute name="type"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description"/>
+  <xs:element name="alt"/>
+  <xs:element name="title"/>
+  <xs:element name="position"/>
+  <xs:element name="url"/>
+  <xs:element name="category"/>
+  <xs:element name="postcode"/>
+  <xs:element name="city">
+    <xs:complexType mixed="true">
+      <xs:attribute name="localisation_id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contact">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="phoneNumbers" minOccurs="0"/>
+        <xs:element ref="websites" minOccurs="0"/>
+        <xs:element ref="emailAdresses" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="placeOfEvent">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="street"/>
+        <xs:element ref="postcode"/>
+        <xs:element ref="city"/>
+        <xs:element ref="contact" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="localDescription"/>
+  <xs:element name="export_url">
+    <xs:complexType mixed="true">
+      <xs:attribute name="username"/>
+      <xs:attribute name="password"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="export_file"/>
+  <xs:element name="export_count"/>
+  <xs:element name="export_version"/>
+  <xs:element name="export_xsd" type="xs:anyURI"/>
+  <xs:element name="export_xsd_types" type="xs:anyURI"/>
+  <xs:element name="export_categories" type="xs:anyURI"/>
+  <xs:element name="export_types" type="xs:anyURI"/>
+  <xs:element name="shortDescription">
+    <xs:complexType mixed="true">
+      <xs:attribute name="language" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="longDescription">
+    <xs:complexType mixed="true">
+      <xs:attribute name="language" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="textFunctionId"/>
+  <xs:element name="content"/>
+  <xs:element name="text">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="content"/>
+        <xs:element ref="textFunctionId"/>
+      </xs:sequence>
+      <xs:attribute name="language" use="required"/>
+      <xs:attribute name="textType"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="texts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="text" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datetime"/>
+  <xs:element name="ticketInfo"/>
+  <xs:element name="ticket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datetime" minOccurs="0"/>
+        <xs:element ref="ticketId" minOccurs="0"/>
+        <xs:element ref="ticketUrl" minOccurs="0"/>
+        <xs:element ref="phoneNumber" minOccurs="0"/>
+        <xs:element ref="ticketInfo" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tickets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ticket" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phoneNumberAreaCode"/>
+  <xs:element name="previewURL"/>
+  <xs:element name="fullscreenURL"/>
+  <xs:element name="defaultURL"/>
+  <xs:element name="movie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="defaultURL"/>
+        <xs:element ref="fullscreenURL" minOccurs="0"/>
+        <xs:element ref="previewURL" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="movieType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="movies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="movie" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
