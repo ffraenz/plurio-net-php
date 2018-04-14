@@ -1,6 +1,7 @@
 
 # plurio-net-php
 
+[![Packagist version](https://img.shields.io/packagist/v/ffraenz/plurio-net-php.svg?maxAge=3600)](https://packagist.org/packages/ffraenz/plurio-net-php)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 This PHP library tries to simplify access to the XML interface of [Plurio.net](http://plurio.net), the database of cultural events in Luxembourg and the greater region.
