@@ -1,0 +1,25 @@
+{
+    "name": "ffraenz/plurio-net-php",
+    "description": "PHP library simplifying access to the database of cultural events in Luxembourg and the greater region",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fränz Friederes",
+            "homepage": "https://fraenz.frieder.es"
+        }
+    ],
+    "homepage": "https://github.com/ffraenz/plurio-net-php",
+    "keywords": [
+        "Plurio.net",
+        "Luxembourg",
+        "Events"
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "FFraenz\\PlurioNet\\": "src/"
+        }
+    }
+}
