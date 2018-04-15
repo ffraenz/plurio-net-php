@@ -20,7 +20,7 @@ class CategoryListing extends Document
 
     /**
      * Array of categories
-     * @var [type]
+     * @var array
      */
     protected $categories;
 

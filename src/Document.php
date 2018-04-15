@@ -71,24 +71,16 @@ class Document
      * Queries values based on given Xpath query(s) and context node.
      * @param DOMNode|null $node Context node
      * @param string|string[] $query One or more Xpath queries
-     * @return string[] Array of strings
+     * @return string[] Returns an array of strings. Returns an empty array
+     * if there are no nodes matching the given query.
      */
     public function queryValues($node, $query)
     {
         $nodes = $this->queryNodes($node, $query);
         $values = [];
-
         foreach ($nodes as $node) {
-            $value = $node instanceof DOMAttr
-                ? $node->value
-                : $node->nodeValue;
-
-            if (!empty($value)) {
-                $value = trim($value);
-            } else {
-                $value = null;
-            }
-
+            $value = $node instanceof DOMAttr ? $node->value : $node->nodeValue;
+            $value = !empty($value) ? trim($value) : null;
             array_push($values, $value);
         }
         return $values;
@@ -102,7 +94,7 @@ class Document
      */
     public function queryNodes($node, $query)
     {
-        // create xpath instance
+        // lazily create an xpath instance
         if ($this->xpath === null) {
             $this->xpath = new DOMXpath(
                 $this->getDocumentNode());

@@ -21,6 +21,12 @@ class Export extends Document
     const DEFAULT_TIMEZONE = 'Europe/Luxembourg';
 
     /**
+     * Pattern for time verification
+     * @var string
+     */
+    const TIME_PATTERN = '/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
+
+    /**
      * Category listing
      * @var CategoryListing
      */
@@ -133,7 +139,7 @@ class Export extends Document
         $id = $this->queryValue(
             $eventNode, '@id');
 
-        if ($id === null) {
+        if (empty($id)) {
             return null;
         }
 
@@ -143,22 +149,27 @@ class Export extends Document
         $name = $this->queryValue(
             $eventNode, 'name');
 
+        if (empty($name)) {
+            return null;
+        }
+
         // read subtitles
         $subtitles = array_filter($this->queryValues(
             $eventNode, ['subtitleOne', 'subtitleTwo']));
 
+        // compose event
         return [
-            'id' => $id,
-            'name' => $name,
-            'subtitles' => $subtitles,
-            'description' => $this->readEventDescription($eventNode),
-            'location' => $this->readEventLocation($eventNode),
-            'contacts' => $this->readEventContacts($eventNode),
-            'occurrences' => $this->readEventOccurrences($eventNode),
-            'pricing' => $this->readEventPricing($eventNode),
-            'categories' => $this->readEventCategories($eventNode),
+            'id'            => $id,
+            'name'          => $name,
+            'subtitles'     => $subtitles,
+            'description'   => $this->readEventDescription($eventNode),
+            'location'      => $this->readEventLocation($eventNode),
+            'contacts'      => $this->readEventContacts($eventNode),
+            'occurrences'   => $this->readEventOccurrences($eventNode),
+            'pricing'       => $this->readEventPricing($eventNode),
+            'categories'    => $this->readEventCategories($eventNode),
             'organisations' => $this->readEventOrganisations($eventNode),
-            'images' => $this->readEventImages($eventNode),
+            'images'        => $this->readEventImages($eventNode),
         ];
     }
 
@@ -335,8 +346,7 @@ class Export extends Document
             $timing = $this->readTiming($timingNode);
 
             // read weekday specific timing
-            $weekdayString = $this->queryValue(
-                $node, 'dateWeekday');
+            $weekdayString = $this->queryValue($node, 'dateWeekday');
             if ($weekdayString !== null) {
                 if (!isset($weekdayTimingsMap[$weekdayString])) {
                     $weekdayTimingsMap[$weekdayString] = [$timing];
@@ -346,8 +356,7 @@ class Export extends Document
             }
 
             // read date specific timing
-            $dateString = $this->queryValue(
-                $node, 'dateDay');
+            $dateString = $this->queryValue($node, 'dateDay');
             if ($dateString !== null) {
                 if (!isset($dateTimingsMap[$dateString])) {
                     $dateTimingsMap[$dateString] = [$timing];
@@ -444,19 +453,34 @@ class Export extends Document
     }
 
     /**
-     * Reads a timing span from given timing node.
+     * Reads and verifies a timing span from given timing node.
      * @param DOMNode $timingNode
-     * @return array
+     * @return array|null
      */
     protected function readTiming($timingNode)
     {
+        $fromTime = $this->queryValue($timingNode, 'timingFrom');
+        $toTime = $this->queryValue($timingNode, 'timingTo');
+        $description = $this->queryValue($timingNode, 'timingDescription');
+
+        // verify required from time
+        if (empty($fromTime) ||
+            preg_match(self::TIME_PATTERN, $fromTime) !== 1) {
+            throw new Exception(sprintf(
+                "'%s' is not a valid time.", $fromTime));
+        }
+
+        // verify optional to time
+        if ($toTime !== null &&
+            preg_match(self::TIME_PATTERN, $toTime) !== 1) {
+            throw new Exception(sprintf(
+                "'%s' is not a valid time.", $toTime));
+        }
+
         return [
-            'from' => $this->queryValue(
-                $timingNode, 'timingFrom'),
-            'to' => $this->queryValue(
-                $timingNode, 'timingTo'),
-            'description' => $this->queryValue(
-                $timingNode, 'timingDescription'),
+            'from' => $fromTime,
+            'to' => $toTime,
+            'description' => $description,
         ];
     }
 
