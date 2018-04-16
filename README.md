@@ -31,109 +31,126 @@ $export = new FFraenz\PlurioNet\Export($exportUrl);
 $events = $export->getEvents();
 ```
 
-The resulting PHP array `$events` is structured similarly to the following JSON-formatted data. Note, that all dates are returned as `DateTime` objects. The data below is shortened and ids are leetified.
+The resulting PHP array `$events` is structured similarly to the following data. Note, that the data below is shortened and ids are leetified.
 
-```json
-{
-  "id": 1337,
-  "name": "Spaghettisfest 2018",
-  "subtitles": [
-    "Since 1985 in Eppeldorf"
-  ],
-  "description": {
-    "lu": "S\u00e4it iwwer 30 Joer versammelen sech...",
-    "en": "For over 30 years hungry people gather..."
-  },
-  "location": {
-    "id": 1337,
-    "name": "Pompjeesbau Eppelduerf",
-    "street": "Faubourg 14",
-    "postcode": "L-9365",
-    "locality": "Eppeldorf",
-    "localityId": "L1337"
-  },
-  "contacts": [
-    {
-      "type": "url",
-      "value": "http:\/\/spaghettisfest.lu"
-    },
-    {
-      "type": "emailAddress",
-      "value": "contact@eppelduerferjugend.lu",
-      "function": {
-        "id": "1337",
-        "description": { "de": "Kontakt", "fr": "Contact" }
-      }
-    },
-    {
-      "type": "phoneNumber",
-      "subtype": "mobile",
-      "value": "00352123456789",
-      "function": {
-        "id": "1337",
-        "description": { "de": "Kontakt", "fr": "Contact" }
-      }
-    }
-  ],
-  "occurrences": [
-    {
-      "allDay": false,
-      "time": "2018-08-15 12:00:00",
-      "endTime": "2018-08-16 03:00:00",
-      "schedule": [
-        {
-          "time": "2018-08-15 12:00:00",
-          "endTime": "2018-08-15 14:00:00",
-          "description": "Spaghetti & Bar"
-        },
-        {
-          "time": "2018-08-15 18:00:00",
-          "endTime": "2018-08-15 22:00:00",
-          "description": "Spaghetti & Bar"
-        },
-        {
-          "time": "2018-08-15 22:00:00",
-          "endTime": "2018-08-16 03:00:00",
-          "description": "Bar"
-        }
-      ]
-    }
-  ],
-  "pricing": [
-    {
-      "value": 12,
-      "description": "Spaghetti All-You-Can-Eat"
-    },
-    {
-      "value": 9,
-      "description": "Spaghetti Small"
-    }
-  ],
-  "categories": [
-    {
-      "id": 1337,
-      "name": { "de": "Gastronomie", "en": "Gastronomy", "fr": "Gastronomie" },
-      "parentName": { "de": "Freizeit", "en": "Leisure", "fr": "Loisirs" }
-    }
-  ],
-  "organisations": [
-    {
-      "id": "1337",
-      "name": "Eppelduerfer Jugend",
-      "function": {
-        "id": "1337",
-        "description": { "de": "Organisation", "fr": "Organisation" }
-      }
-    }
-  ],
-  "images": [
-    {
-      "id": 1337,
-      "url": "http:\/\/example.com/image.png",
-      "title": "Image title",
-      "alt": "Image alt",
-      "position": "default"
-    }
-  ]
-}
+```php
+[
+    "id" => 1337,
+    "name" => "Spaghettisfest 2018",
+    "subtitles" => [
+        "Since 1985 in Eppeldorf"
+    ],
+    "description" => [
+        "lu" => "S\u00e4it iwwer 30 Joer versammelen sech...",
+        "en" => "For over 30 years hungry people gather..."
+    ],
+    "location" => [
+        "id" => 1337,
+        "name" => "Pompjeesbau Eppelduerf",
+        "street" => "Faubourg 14",
+        "postcode" => "L-9365",
+        "locality" => "Eppeldorf",
+        "localityId" => "L1337"
+    ],
+    "contacts" => [
+        [
+            "type" => "url",
+            "value" => "http://spaghettisfest.lu"
+        ],
+        [
+            "type" => "emailAddress",
+            "value" => "contact@eppelduerferjugend.lu",
+            "function" => [
+                "id" => "1337",
+                "description" => [
+                    "de" => "Kontakt",
+                    "fr" => "Contact"
+                ]
+            ]
+        ],
+        [
+            "type" => "phoneNumber",
+            "subtype" => "mobile",
+            "value" => "00352123456789",
+            "function" => [
+                "id" => "1337",
+                "description" => [
+                    "de" => "Kontakt",
+                    "fr" => "Contact"
+                ]
+            ]
+        ]
+    ],
+    "occurrences" => [
+        [
+            "allDay" => false,
+            "time" => new DateTime("2018-08-15 12:00:00"),
+            "endTime" => new DateTime("2018-08-16 03:00:00"),
+            "schedule" => [
+                [
+                    "time" => new DateTime("2018-08-15 12:00:00"),
+                    "endTime" => new DateTime("2018-08-15 14:00:00"),
+                    "description" => "Spaghetti & Bar"
+                ],
+                [
+                    "time" => new DateTime("2018-08-15 18:00:00"),
+                    "endTime" => new DateTime("2018-08-15 22:00:00"),
+                    "description" => "Spaghetti & Bar"
+                ],
+                [
+                    "time" => new DateTime("2018-08-15 22:00:00"),
+                    "endTime" => new DateTime("2018-08-16 03:00:00"),
+                    "description" => "Bar"
+                ]
+            ]
+        ]
+    ],
+    "pricing" => [
+        [
+            "value" => 12,
+            "description" => "Spaghetti All-You-Can-Eat"
+        ],
+        [
+            "value" => 9,
+            "description" => "Spaghetti Small"
+        ]
+    ],
+    "categories" => [
+        [
+            "id" => 1337,
+            "name" => [
+                "de" => "Gastronomie",
+                "en" => "Gastronomy",
+                "fr" => "Gastronomie"
+            ],
+            "parentName" => [
+                "de" => "Freizeit",
+                "en" => "Leisure",
+                "fr" => "Loisirs"
+            ]
+        ]
+    ],
+    "organisations" => [
+        [
+            "id" => "1337",
+            "name" => "Eppelduerfer Jugend",
+            "function" => [
+                "id" => "1337",
+                "description" => [
+                    "de" => "Organisation",
+                    "fr" => "Organisation"
+                ]
+            ]
+        ]
+    ],
+    "images" => [
+        [
+            "id" => 1337,
+            "url" => "http://example.com/image.png",
+            "title" => "Image title",
+            "alt" => "Image alt",
+            "position" => "default"
+        ]
+    ]
+];
 ```
